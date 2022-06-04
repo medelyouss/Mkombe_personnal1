@@ -1,0 +1,269 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock stylesheets %}
+
+{% block topmenu %}
+    {{ parent() }}
+{% endblock topmenu %}
+{% block body %}
+    {#
+    {#SLIDER#
+    <div id="inSlider" class="carousel carousel-fade" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#inSlider" data-slide-to="0" class="active"></li>
+            <li data-target="#inSlider" data-slide-to="1"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1>We craft<br/>
+                            brands, web apps,<br/>
+                            and user interfaces<br/>
+                            we are IN+ studio</h1>
+                        <p>Lorem Ipsum is simply dummy text of the printing.</p>
+                        <p>
+                            <a class="btn btn-lg btn-primary" href="#" role="button">READ MORE</a>
+                            <a class="caption-link" href="#" role="button">Inspinia Theme</a>
+                        </p>
+                    </div>
+                    <div class="carousel-image wow zoomIn">
+                        <img src="img/landing/laptop.png" alt="laptop"/>
+                    </div>
+                </div>
+                <!-- Set background for slide in css -->
+                <div class="header-back one"></div>
+
+            </div>
+            <div class="item">
+                <div class="container">
+                    <div class="carousel-caption blank">
+                        <h1>We create meaningful <br/> interfaces that inspire.</h1>
+                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+                        <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+                    </div>
+                </div>
+                <!-- Set background for slide in css -->
+                <div class="header-back two"></div>
+            </div>
+        </div>
+        <a class="left carousel-control" href="#inSlider" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#inSlider" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    #}
+
+    <section class="container services  m-b-n-lg">
+        <div class="row">
+            <div class="col-sm-12 m-t-lg">
+                <h1>Faites votre recherche</h1>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="order_id">Order ID</label>
+                    <input type="text" id="order_id" name="order_id" value="" placeholder="Order ID" class="form-control">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="status">Order status</label>
+                    <input type="text" id="status" name="status" value="" placeholder="Status" class="form-control">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="customer">Customer</label>
+                    <input type="text" id="customer" name="customer" value="" placeholder="Customer" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="date_added">Date added</label>
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input id="date_added" type="text" class="form-control" value="03/04/2014">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="date_modified">Date modified</label>
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input id="date_modified" type="text" class="form-control" value="03/06/2014">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="amount">Amount</label>
+                    <input type="text" id="amount" name="amount" value="" placeholder="Amount" class="form-control">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mkombe-gray-section">
+        <div class="container">
+            <div class="row m-t-lg">
+                <div class="col-md-3">
+                    <div class="ibox">
+                        <div class="ibox-content product-box">
+
+                            <div class="product-imitation">
+                                [ INFO ]
+                            </div>
+                            <div class="product-desc">
+                                        <span class="product-price">
+                                            $10
+                                        </span>
+                                <small class="text-muted">Category</small>
+                                <a href="#" class="product-name"> Product</a>
+
+
+
+                                <div class="small m-t-xs">
+                                    Many desktop publishing packages and web page editors now.
+                                </div>
+                                <div class="m-t text-righ">
+
+                                    <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="ibox">
+                        <div class="ibox-content product-box">
+
+                            <div class="product-imitation">
+                                [ INFO ]
+                            </div>
+                            <div class="product-desc">
+                                        <span class="product-price">
+                                            $10
+                                        </span>
+                                <small class="text-muted">Category</small>
+                                <a href="#" class="product-name"> Product</a>
+
+
+
+                                <div class="small m-t-xs">
+                                    Many desktop publishing packages and web page editors now.
+                                </div>
+                                <div class="m-t text-righ">
+
+                                    <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="ibox">
+                        <div class="ibox-content product-box">
+
+                            <div class="product-imitation">
+                                [ INFO ]
+                            </div>
+                            <div class="product-desc">
+                                        <span class="product-price">
+                                            $10
+                                        </span>
+                                <small class="text-muted">Category</small>
+                                <a href="#" class="product-name"> Product</a>
+
+
+
+                                <div class="small m-t-xs">
+                                    Many desktop publishing packages and web page editors now.
+                                </div>
+                                <div class="m-t text-righ">
+
+                                    <a href="#" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="ibox">
+                        <div class="ibox-content product-box b-r-md">
+
+                            <div class="">
+                                <img src="{{ asset('medel_website_assets/img/test-e.png') }}" class="img-responsive b-r-top-md" >
+                            </div>
+                            <div class="product-desc">
+
+                                        <span class="mkombe-img-number">
+                                            <a href="" class="mkombe-white-link"> 2 img <i class="fa fa-eye"></i></a>
+                                        </span>
+
+                                <small class="text-muted">Category</small>
+                                <a href="#" class="product-name"> Product</a>
+
+
+
+                                <div class="m-t-xs">
+                                    Many desktop publishing packages and web page editors now.
+                                </div>
+                                {#<div class="border-bottom m-t-xs"></div>#}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <section class="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+
+                    <h1>Even more great feautres</h1>
+
+                    <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. </p>
+                </div>
+            </div>
+            <div class="row features-block">
+                <div class="col-lg-3 features-text wow fadeInLeft">
+                    <small>INSPINIA</small>
+                    <h2>Perfectly designed </h2>
+                    <p>INSPINIA Admin Theme is a premium admin dashboard template with flat design concept. It is fully responsive admin dashboard template built with Bootstrap 3+ Framework, HTML5 and CSS3, Media query. It has a huge collection of reusable UI components and integrated with latest jQuery plugins.</p>
+                    <a href="" class="btn btn-primary">Learn more</a>
+                </div>
+                <div class="col-lg-6 text-right m-t-n-lg wow zoomIn">
+                    <img src="medel_website_assets/img/landing/iphone.jpg" class="img-responsive" alt="dashboard">
+                </div>
+                <div class="col-lg-3 features-text text-right wow fadeInRight">
+                    <small>INSPINIA</small>
+                    <h2>Perfectly designed </h2>
+                    <p>INSPINIA Admin Theme is a premium admin dashboard template with flat design concept. It is fully responsive admin dashboard template built with Bootstrap 3+ Framework, HTML5 and CSS3, Media query. It has a huge collection of reusable UI components and integrated with latest jQuery plugins.</p>
+                    <a href="" class="btn btn-primary">Learn more</a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock javascripts %}
+
+
