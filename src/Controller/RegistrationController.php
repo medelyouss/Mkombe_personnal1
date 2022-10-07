@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Principal\Auth\User;
-use App\Http\Form\RegistrationFormType;
+use App\Entity\User;
+use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -51,7 +51,7 @@ class RegistrationController extends AbstractController
                 (new TemplatedEmail())
                     ->from(new Address('medelyoussouf@comorestelecom.km', 'Mkombe'))
                     ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
+                    ->subject("Confirmation de votre email")
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email

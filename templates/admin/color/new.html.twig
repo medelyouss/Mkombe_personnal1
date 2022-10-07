@@ -1,0 +1,11 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}New ProductColor{% endblock %}
+
+{% block body %}
+    <h1>Create new ProductColor</h1>
+
+    {{ include('admin/color/_form.html.twig') }}
+
+    <a href="{{ path('app_color_index') }}">back to list</a>
+{% endblock %}

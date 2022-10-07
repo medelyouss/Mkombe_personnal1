@@ -6,12 +6,15 @@ use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
 class Product
 {
+    //use GenreTrait;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -29,10 +32,6 @@ class Product
      */
     private $dateCreatedAt;
 
-    /**
-     * @ORM\OneToMany(targetEntity=ProductImage::class, mappedBy="product", orphanRemoval=true)
-     */
-    private $images;
 
     /**
      * @ORM\Column(type="string", length=255,  nullable=true)
@@ -44,15 +43,30 @@ class Product
      */
     private $price;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=ProductSouscategory::class, mappedBy="products")
-     */
-    private $souscategories;
 
+     //* ======================== FIELDS SPECIFIQUE A VETEMENT ================================
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $vetementTaille;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=ProductColor::class, inversedBy="products")
+     */
+    private $colors;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Concerne::class, inversedBy="products")
+     */
+    private $concernes;
+
+    //========================- FIN FIELDS SPECIFIQUE A VETEMENT -================================
+    
     public function __construct()
     {
-        $this->images = new ArrayCollection();
-        $this->souscategories = new ArrayCollection();
+        date_default_timezone_set("Africa/Dar_es_Salaam");
+        $this->colors = new ArrayCollection();
+        $this->concernes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -84,36 +98,6 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection<int, ProductImage>
-     */
-    public function getImages(): Collection
-    {
-        return $this->images;
-    }
-
-    public function addImage(ProductImage $image): self
-    {
-        if (!$this->images->contains($image)) {
-            $this->images[] = $image;
-            $image->setProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removeImage(ProductImage $image): self
-    {
-        if ($this->images->removeElement($image)) {
-            // set the owning side to null (unless already changed)
-            if ($image->getProduct() === $this) {
-                $image->setProduct(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getMiniDescription(): ?string
     {
         return $this->miniDescription;
@@ -138,29 +122,62 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection<int, ProductSouscategory>
-     */
-    public function getSouscategories(): Collection
+    public function getVetementTaille(): ?float
     {
-        return $this->souscategories;
+        return $this->vetementTaille;
     }
 
-    public function addSouscategory(ProductSouscategory $souscategory): self
+    public function setVetementTaille(?float $vetementTaille): self
     {
-        if (!$this->souscategories->contains($souscategory)) {
-            $this->souscategories[] = $souscategory;
-            $souscategory->addProduct($this);
+        $this->vetementTaille = $vetementTaille;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ProductColor>
+     */
+    public function getColors(): Collection
+    {
+        return $this->colors;
+    }
+
+    public function addColor(ProductColor $color): self
+    {
+        if (!$this->colors->contains($color)) {
+            $this->colors[] = $color;
         }
 
         return $this;
     }
 
-    public function removeSouscategory(ProductSouscategory $souscategory): self
+    public function removeColor(ProductColor $color): self
     {
-        if ($this->souscategories->removeElement($souscategory)) {
-            $souscategory->removeProduct($this);
+        $this->colors->removeElement($color);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Concerne>
+     */
+    public function getConcernes(): Collection
+    {
+        return $this->concernes;
+    }
+
+    public function addConcerne(Concerne $concerne): self
+    {
+        if (!$this->concernes->contains($concerne)) {
+            $this->concernes[] = $concerne;
         }
+
+        return $this;
+    }
+
+    public function removeConcerne(Concerne $concerne): self
+    {
+        $this->concernes->removeElement($concerne);
 
         return $this;
     }

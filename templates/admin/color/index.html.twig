@@ -1,0 +1,37 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}ProductColor index{% endblock %}
+
+{% block body %}
+    <h1>{{ parent() }}</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Designation</th>
+                <th>Couleur</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product_color in product_colors %}
+            <tr>
+                <td>{{ product_color.id }}</td>
+                <td>{{ product_color.designation }}</td>
+                <td><i class="fa fa-circle mk-{{ product_color.codeColor }}"></i></td>
+                <td>
+                    <a href="{{ path('app_color_show', {'id': product_color.id}) }}">show</a>
+                    <a href="{{ path('app_color_edit', {'id': product_color.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun enregistrement</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_color_new') }}">Ajouter</a>
+{% endblock %}

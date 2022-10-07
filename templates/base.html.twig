@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{% block title %}M'kombé!{% endblock %}</title>
+    <title>{% block title %}Mkombé!{% endblock %}</title>
 
     {#{% set current_route = app.request.attributes.get('_route') %}#}
     {% set current_route = app.request.get('_route') %}
@@ -24,7 +24,7 @@
         <link href="{{ asset('medel_assets/css/style.css') }}" rel="stylesheet">
     {% endblock stylesheets %}
 </head>
-<body id="page-top" class="landing-page no-skin-config">
+<body id="page-top" class="landing-page">
 
     {% block topmenu %}
         <div class="navbar-wrapper">
@@ -183,7 +183,7 @@
         <script src="{{ asset('medel_assets/js/plugins/pace/pace.min.js') }}"></script>
         <script src="{{ asset('medel_assets/js/plugins/wow/wow.min.js') }}"></script>
 
-        <script>
+    <script>
 
         $(document).ready(function () {
 

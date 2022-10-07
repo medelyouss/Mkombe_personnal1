@@ -26,3 +26,25 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    #============== Loggin listner  ================
+    App\EventListener\LoginListener:
+        tags:
+            - { name: 'kernel.event_listener', event: 'security.interactive_login' }
+
+    #============== Service pour les logs ================
+    monolog.dbHandler:
+        class: App\GlobalCall\DbHandler
+        #monolog.dbHandler:
+        #    class: App\GlobalCall\DbHandler
+        #    arguments: ['@doctrine.orm.entity_manager']
+
+    monolog.dbProcessor:
+        class: App\GlobalCall\DbProcessor
+        tags:
+            - {name: monolog.processor, handler: dbHandler}
+
+    doctrine.doctrineSubscriber:
+        class: App\EventListener\DoctrineSubscriber
+        tags:
+            - {name: 'doctrine.event_subscriber'}

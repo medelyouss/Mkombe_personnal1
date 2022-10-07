@@ -4170,6 +4170,34 @@ table.table-mail tr td {
 .text-white {
   color: #ffffff;
 }
+
+/* Mkombe text color */
+.mk-blanc{
+  color: #fff;
+}
+.mk-gris {
+  color: #888888;
+}
+.mk-noir{
+  color: #000000;
+}
+.mk-rouge{
+  color: #e42f2f;
+}
+.mk-jaune{
+  color: #ffe84f;
+}
+.mk-orange {
+  color: #f8ac59;
+}
+.mk-bleu {
+  color: #1c84c6;
+}
+.mk-vert {
+  color: #1ab394;
+}
+/* FIN Mkombe text color */
+
 .simple_tag {
   background-color: #f3f3f4;
   border: 1px solid #e7eaec;
@@ -6904,6 +6932,8 @@ body.landing-page {
 .landing-page a.mkombe-white-link {
   color: #fff;
   text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
 }
 .landing-page a.mkombe-white-link:hover {
   color: #f1a417;
@@ -7745,12 +7775,16 @@ body.rtls.top-navigation .footer.fixed {
  *   Use only in demo theme
  *
 */
+
+
+/**
 .theme-config {
   position: absolute;
   top: 90px;
   right: 0;
   overflow: hidden;
 }
+ */
 .theme-config-box {
   margin-right: -220px;
   position: relative;

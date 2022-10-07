@@ -25,7 +25,6 @@ class ProductImage
      */
     private $imageName;
 
-
     /**
      * @Vich\UploadableField(mapping="product_images", fileNameProperty="imageName")
      * @var File
@@ -37,12 +36,6 @@ class ProductImage
      * @var \DateTime
      */
     private $updatedAt;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Product::class, inversedBy="images")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $product;
 
     /**
      * @ORM\Column(type="boolean", options={"default":"0"})
@@ -71,25 +64,6 @@ class ProductImage
     public function getImageName(): ?string
     {
         return $this->imageName;
-    }
-
-    public function setImageName(string $imageName): self
-    {
-        $this->imageName = $imageName;
-
-        return $this;
-    }
-
-    public function getProduct(): ?Product
-    {
-        return $this->product;
-    }
-
-    public function setProduct(?Product $product): self
-    {
-        $this->product = $product;
-
-        return $this;
     }
 
     public function getIsThumb(): ?bool
