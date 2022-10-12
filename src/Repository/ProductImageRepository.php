@@ -2,32 +2,32 @@
 
 namespace App\Repository;
 
-use App\Entity\ProductImage;
+use App\Entity\Productimage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<ProductImage>
+ * @extends ServiceEntityRepository<Productimage>
  *
- * @method ProductImage|null find($id, $lockMode = null, $lockVersion = null)
- * @method ProductImage|null findOneBy(array $criteria, array $orderBy = null)
- * @method ProductImage[]    findAll()
- * @method ProductImage[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Productimage|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Productimage|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Productimage[]    findAll()
+ * @method Productimage[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ProductImageRepository extends ServiceEntityRepository
+class ProductimageRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ProductImage::class);
+        parent::__construct($registry, Productimage::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(ProductImage $entity, bool $flush = true): void
+    public function add(Productimage $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -39,7 +39,7 @@ class ProductImageRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(ProductImage $entity, bool $flush = true): void
+    public function remove(Productimage $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -48,7 +48,7 @@ class ProductImageRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return ProductImage[] Returns an array of ProductImage objects
+    //  * @return Productimage[] Returns an array of Productimage objects
     //  */
     /*
     public function findByExampleField($value)
@@ -65,7 +65,7 @@ class ProductImageRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?ProductImage
+    public function findOneBySomeField($value): ?Productimage
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')

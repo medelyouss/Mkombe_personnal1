@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Product
 {
-    //use GenreTrait;
+    use ProductConditionTrait;
 
     /**
      * @ORM\Id
@@ -32,41 +32,77 @@ class Product
      */
     private $dateCreatedAt;
 
-
-    /**
-     * @ORM\Column(type="string", length=255,  nullable=true)
-     */
-    private $miniDescription;
-
     /**
      * @ORM\Column(type="float")
      */
     private $price;
 
-
-     //* ======================== FIELDS SPECIFIQUE A VETEMENT ================================
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $vetementTaille;
+    private $shortdescription;
 
     /**
-     * @ORM\ManyToMany(targetEntity=ProductColor::class, inversedBy="products")
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $strongpoints;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Productcolor::class, inversedBy="products")
      */
     private $colors;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Concerne::class, inversedBy="products")
+     * @Assert\All({
+     *  @Assert\Image(mimeTypes={"image/png", "image/jpeg", "image/jpg"})
+     * })
      */
-    private $concernes;
+    private $fichiersImage;
 
-    //========================- FIN FIELDS SPECIFIQUE A VETEMENT -================================
+
+    //======= Mchadhariet autres ======//
+    /**
+     * Provenance (D'où provient le produit)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $origin;
+
+    /**=================== Disponibilité ============= 1) dispo en stock, dispo sur commande, indispo
+     *
+     * @ORM\Column(type="string", length=150)
+     */
+    private $availablity;
+
+
+    //============ DRAP ================
+    /**
+     * @ORM\ManyToMany(targetEntity=Drapdimension::class, inversedBy="products")
+     */
+    private $drapdimension;
+
+    //============ FIN DRAP ================
+    /**
+     * @ORM\ManyToOne(targetEntity=Productmarque::class, inversedBy="products")
+     */
+    private $marque;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Productcategory::class, inversedBy="products")
+     */
+    private $categories;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Productimage::class, mappedBy="product", orphanRemoval=true, cascade={"persist"})
+     */
+    private $images;
     
     public function __construct()
     {
         date_default_timezone_set("Africa/Dar_es_Salaam");
         $this->colors = new ArrayCollection();
-        $this->concernes = new ArrayCollection();
+        $this->drapdimension = new ArrayCollection();
+        $this->categories = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -98,18 +134,6 @@ class Product
         return $this;
     }
 
-    public function getMiniDescription(): ?string
-    {
-        return $this->miniDescription;
-    }
-
-    public function setMiniDescription(string $miniDescription): self
-    {
-        $this->miniDescription = $miniDescription;
-
-        return $this;
-    }
-
     public function getPrice(): ?float
     {
         return $this->price;
@@ -122,27 +146,39 @@ class Product
         return $this;
     }
 
-    public function getVetementTaille(): ?float
+    public function getShortdescription(): ?string
     {
-        return $this->vetementTaille;
+        return $this->shortdescription;
     }
 
-    public function setVetementTaille(?float $vetementTaille): self
+    public function setShortdescription(string $shortdescription): self
     {
-        $this->vetementTaille = $vetementTaille;
+        $this->shortdescription = $shortdescription;
+
+        return $this;
+    }
+
+    public function getStrongpoints(): ?string
+    {
+        return $this->strongpoints;
+    }
+
+    public function setStrongpoints(?string $strongpoints): self
+    {
+        $this->strongpoints = $strongpoints;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, ProductColor>
+     * @return Collection<int, Productcolor>
      */
     public function getColors(): Collection
     {
         return $this->colors;
     }
 
-    public function addColor(ProductColor $color): self
+    public function addColor(Productcolor $color): self
     {
         if (!$this->colors->contains($color)) {
             $this->colors[] = $color;
@@ -151,33 +187,152 @@ class Product
         return $this;
     }
 
-    public function removeColor(ProductColor $color): self
+    public function removeColor(Productcolor $color): self
     {
         $this->colors->removeElement($color);
 
         return $this;
     }
 
+    //================ IMAGES ===========
+
     /**
-     * @return Collection<int, Concerne>
+     * @return mixed
      */
-    public function getConcernes(): Collection
+    public function getFichiersImage()
     {
-        return $this->concernes;
+        return $this->fichiersImage;
     }
 
-    public function addConcerne(Concerne $concerne): self
+    /**
+     * @param $fichiersImage
+     * @return Product
+     */
+
+    public function setFichiersImage($fichiersImage): self
     {
-        if (!$this->concernes->contains($concerne)) {
-            $this->concernes[] = $concerne;
+        foreach ($fichiersImage as $fichierImage){
+            $image = new Productimage();
+            $image->setImageFile($fichierImage);
+            $this->addImage($image);
+        }
+        $this->fichiersImage = $fichiersImage;
+        return $this;
+    }
+
+    //================ FIN IMAGES ===========
+
+
+    public function getOrigin(): ?string
+    {
+        return $this->origin;
+    }
+
+    public function setOrigin(?string $origin): self
+    {
+        $this->origin = $origin;
+
+        return $this;
+    }
+
+    public function getAvailablity(): ?string
+    {
+        return $this->availablity;
+    }
+
+    public function setAvailablity(string $availablity): self
+    {
+        $this->availablity = $availablity;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Drapdimension>
+     */
+    public function getDrapdimension(): Collection
+    {
+        return $this->drapdimension;
+    }
+
+    public function addDrapdimension(Drapdimension $drapdimension): self
+    {
+        if (!$this->drapdimension->contains($drapdimension)) {
+            $this->drapdimension[] = $drapdimension;
         }
 
         return $this;
     }
 
-    public function removeConcerne(Concerne $concerne): self
+    public function removeDrapdimension(Drapdimension $drapdimension): self
     {
-        $this->concernes->removeElement($concerne);
+        $this->drapdimension->removeElement($drapdimension);
+
+        return $this;
+    }
+
+    public function getMarque(): ?Productmarque
+    {
+        return $this->marque;
+    }
+
+    public function setMarque(?Productmarque $marque): self
+    {
+        $this->marque = $marque;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Productcategory>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Productcategory $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Productcategory $category): self
+    {
+        $this->categories->removeElement($category);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Productimage>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Productimage $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Productimage $image): self
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getProduct() === $this) {
+                $image->setProduct(null);
+            }
+        }
 
         return $this;
     }

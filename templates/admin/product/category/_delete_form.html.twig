@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('productcategory_delete', {'id': productcategory.id}) }}"
+      onsubmit="return confirm('Action irreversible, continuer?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ productcategory.id) }}">
+    <button class="btn btn-xs btn-danger">Supprimer</button>
+</form>

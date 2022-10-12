@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\ProductcategoryRepository;
+use App\Repository\DrapdimensionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ProductcategoryRepository::class)
+ * @ORM\Entity(repositoryClass=DrapdimensionRepository::class)
  */
-class Productcategory
+class Drapdimension
 {
     /**
      * @ORM\Id
@@ -22,10 +22,10 @@ class Productcategory
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $designation;
+    private $dimension;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Product::class, mappedBy="categories")
+     * @ORM\ManyToMany(targetEntity=Product::class, mappedBy="drapdimension")
      */
     private $products;
 
@@ -34,24 +34,19 @@ class Productcategory
         $this->products = new ArrayCollection();
     }
 
-    public function __toString()
-    {
-        return (string) $this->getDesignation();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDesignation(): ?string
+    public function getDimension(): ?string
     {
-        return $this->designation;
+        return $this->dimension;
     }
 
-    public function setDesignation(string $designation): self
+    public function setDimension(string $dimension): self
     {
-        $this->designation = $designation;
+        $this->dimension = $dimension;
 
         return $this;
     }
@@ -68,7 +63,7 @@ class Productcategory
     {
         if (!$this->products->contains($product)) {
             $this->products[] = $product;
-            $product->addCategory($this);
+            $product->addDrapdimension($this);
         }
 
         return $this;
@@ -77,7 +72,7 @@ class Productcategory
     public function removeProduct(Product $product): self
     {
         if ($this->products->removeElement($product)) {
-            $product->removeCategory($this);
+            $product->removeDrapdimension($this);
         }
 
         return $this;

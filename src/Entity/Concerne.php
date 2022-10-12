@@ -24,16 +24,6 @@ class Concerne
      */
     private $designation;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Product::class, mappedBy="concernes")
-     */
-    private $products;
-
-    public function __construct()
-    {
-        $this->products = new ArrayCollection();
-    }
-
 
     public function __toString()
     {
@@ -53,33 +43,6 @@ class Concerne
     public function setDesignation(string $designation): self
     {
         $this->designation = $designation;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Product>
-     */
-    public function getProducts(): Collection
-    {
-        return $this->products;
-    }
-
-    public function addProduct(Product $product): self
-    {
-        if (!$this->products->contains($product)) {
-            $this->products[] = $product;
-            $product->addConcerne($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProduct(Product $product): self
-    {
-        if ($this->products->removeElement($product)) {
-            $product->removeConcerne($this);
-        }
 
         return $this;
     }

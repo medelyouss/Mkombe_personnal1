@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\ProductSouscategory;
+use App\Entity\Productmarque;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<ProductSouscategory>
+ * @extends ServiceEntityRepository<Productmarque>
  *
- * @method ProductSouscategory|null find($id, $lockMode = null, $lockVersion = null)
- * @method ProductSouscategory|null findOneBy(array $criteria, array $orderBy = null)
- * @method ProductSouscategory[]    findAll()
- * @method ProductSouscategory[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Productmarque|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Productmarque|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Productmarque[]    findAll()
+ * @method Productmarque[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ProductSouscategoryRepository extends ServiceEntityRepository
+class ProductmarqueRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ProductSouscategory::class);
+        parent::__construct($registry, Productmarque::class);
     }
 
-    public function add(ProductSouscategory $entity, bool $flush = false): void
+    public function add(Productmarque $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class ProductSouscategoryRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(ProductSouscategory $entity, bool $flush = false): void
+    public function remove(Productmarque $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class ProductSouscategoryRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return ProductSouscategory[] Returns an array of ProductSouscategory objects
+//     * @return Productmarque[] Returns an array of Productmarque objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class ProductSouscategoryRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?ProductSouscategory
+//    public function findOneBySomeField($value): ?Productmarque
 //    {
 //        return $this->createQueryBuilder('p')
 //            ->andWhere('p.exampleField = :val')

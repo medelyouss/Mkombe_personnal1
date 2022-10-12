@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProductType extends AbstractType
+class ProductMchadhariType extends AbstractType
 {
     private $concerneRepo;
     public function __construct(ConcerneRepository $concerneRepository)
@@ -25,32 +25,25 @@ class ProductType extends AbstractType
     {
         $builder
             ->add('designation')
-
-            /*
-             ->add('concernes', EntityType::class, [
-                'class' => Concerne::class,
-                'choice_label' => function(Concerne $concerne) {
-                    return sprintf('%s', $concerne->getDesignation());
-                },
-                'choices' => $this->concerneRepo->findAll(),
-                'required' => true,
-                'multiple' => true,
-                'placeholder' => 'Selectionner'
-            ])
-             */
             ->add('shortdescription')
+            ->add('strongpoints')
             ->add('price')
+            ->add('origin')
+            ->add('availablity')
             ->add('categories')
 
-            /*
-             */
-
-             ->add('productcondition', ChoiceType::class, [
+            //NEUF, OCCASION ?
+            ->add('productcondition', ChoiceType::class, [
                 'required' => true,
                 'choices' => array_flip(Product::$productconditions)
             ])
 
             ->add('colors')
+            ->add('fichiersImage', FileType::class, [
+                'required'    => false,
+                'multiple' => true,
+                'label' => "Images"
+            ])
         ;
     }
 

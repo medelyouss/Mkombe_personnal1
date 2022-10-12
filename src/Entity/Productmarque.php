@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\ProductcategoryRepository;
+use App\Repository\ProductmarqueRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ProductcategoryRepository::class)
+ * @ORM\Entity(repositoryClass=ProductmarqueRepository::class)
  */
-class Productcategory
+class Productmarque
 {
     /**
      * @ORM\Id
@@ -20,23 +20,18 @@ class Productcategory
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=150)
      */
     private $designation;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Product::class, mappedBy="categories")
+     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="marque")
      */
     private $products;
 
     public function __construct()
     {
         $this->products = new ArrayCollection();
-    }
-
-    public function __toString()
-    {
-        return (string) $this->getDesignation();
     }
 
     public function getId(): ?int
@@ -68,7 +63,7 @@ class Productcategory
     {
         if (!$this->products->contains($product)) {
             $this->products[] = $product;
-            $product->addCategory($this);
+            $product->setMarque($this);
         }
 
         return $this;
@@ -77,7 +72,10 @@ class Productcategory
     public function removeProduct(Product $product): self
     {
         if ($this->products->removeElement($product)) {
-            $product->removeCategory($this);
+            // set the owning side to null (unless already changed)
+            if ($product->getMarque() === $this) {
+                $product->setMarque(null);
+            }
         }
 
         return $this;

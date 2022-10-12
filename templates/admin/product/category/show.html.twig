@@ -1,0 +1,26 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block body %}
+    <h1>Productcategory</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ productcategory.id }}</td>
+            </tr>
+            <tr>
+                <th>Designation</th>
+                <td>{{ productcategory.designation }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('productcategory_index') }}">Retour</a>
+
+    <a href="{{ path('productcategory_edit', {'id': productcategory.id}) }}" class="btn btn-sm btn-warning">Modifier</a>
+
+    {{ include('admin/product/category/_delete_form.html.twig') }}
+{% endblock %}

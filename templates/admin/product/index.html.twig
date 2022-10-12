@@ -11,7 +11,16 @@
                 <div class="ibox-content">
                     <div class="row">
                         <div class="col-sm-12 m-b-md">
-                            <a href="{{ path('app_product_new') }}" class="btn btn-xs btn-primary"><i class="fa fa-plus"></i> produit</a>
+                            <div class="btn-group">
+                                <button data-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"><i class="fa fa-plus"></i> produit <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ path('product_new', {'product_type' : "mshadhari"}) }}">+ Mshadhari</a></li>
+                                    <li><a href="#">+ Draps</a></li>
+                                    <li><a href="#">+ chaussures</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">+ produit générique</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     {#
@@ -53,11 +62,10 @@
                             <tr>
                                 <th>#</th>
                                 <th>Désignation</th>
-                                <th>Date</th>
-                                <th>Mini Description</th>
+                                <th>Ajouté le </th>
+                                <th>Catégorie(s)</th>
                                 <th>Prix</th>
-                                <th>Vetement Taille</th>
-                                <th>Genre</th>
+                                <th><i class="fa fa-image"></i> </th>
                                 <th>#</th>
                             </tr>
                             </thead>
@@ -69,18 +77,25 @@
 
                                 <td>{{ product.designation }}</td>
                                 <td>{{ product.dateCreatedAt ? product.dateCreatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                                <td>{{ product.miniDescription }}</td>
+                                <td>#</td>
                                 <td>{{ product.price }}</td>
-                                <td>{{ product.vetementTaille }}</td>
-                                <td>{#{{ product.getGenreName() }}#}{% for concerne in product.getConcernes()  %}{{ concerne }}{% endfor %}#</td>
+
+                                <td><a href="#">
+                                        {{ product.getImages() | length }}
+                                    </a>
+                                </td>
+
                                 {#
-                                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                <td><a href="#">
+                                        <i class="fa fa-check text-navy"></i></a>
+                                </td>
                                 #}
+
                                 <td>
-                                    <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-xs btn-outline btn-primary">
+                                    <a href="{{ path('product_show', {'id': product.id}) }}" class="btn btn-xs btn-outline btn-primary">
                                         <i class="fa fa-eye"></i> Voir
                                     </a>
-                                    <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="btn btn-xs btn-outline btn-warning">
+                                    <a href="{{ path('product_edit', {'id': product.id}) }}" class="btn btn-xs btn-outline btn-warning">
                                         <i class="fa fa-edit text-warning"></i> Editer
                                     </a>
                                     {{ include('admin/product/_delete_form.html.twig') }}

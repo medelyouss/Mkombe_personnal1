@@ -47,15 +47,17 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
             // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+            $this->emailVerifier->sendEmailConfirmation('verification_email', $user,
                 (new TemplatedEmail())
-                    ->from(new Address('medelyoussouf@comorestelecom.km', 'Mkombe'))
+                    ->from(new Address('medelyoussouf@comorestelecom.km', 'MKOMBE'))
                     ->to($user->getEmail())
                     ->subject("Confirmation de votre email")
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
+                    ->htmlTemplate('pages/registration/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email
 
+            //Après l'envoi de l'email on peut rediriger l'utilisateur à une page
+            //pour lui indiquer que nous lui avons enoyé un mail pour vérifier son adresse mail
             return $this->redirectToRoute('auth_login');
         }
 
@@ -65,7 +67,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/verify/email", name="app_verify_email")
+     * @Route("/verify/email", name="verification_email")
      */
     public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
     {
@@ -84,5 +86,15 @@ class RegistrationController extends AbstractController
         $this->addFlash('success', 'Your email address has been verified.');
 
         return $this->redirectToRoute('register');
+    }
+
+
+    /**
+     * @Route("/compte/verification/email", name="attente_verification_email")
+     */
+    public function waitForConfirmationUserEmail(Request $request, TranslatorInterface $translator): Response
+    {
+
+        return $this->render('pages/registration/waiting_for_confirmation.html.twig', []);
     }
 }

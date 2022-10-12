@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\ProductColorRepository;
+use App\Repository\ProductcolorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ProductColorRepository::class)
+ * @ORM\Entity(repositoryClass=ProductcolorRepository::class)
  */
-class ProductColor
+class Productcolor
 {
     /**
      * @ORM\Id

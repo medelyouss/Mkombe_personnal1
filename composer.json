@@ -29,12 +29,12 @@
         "symfony/proxy-manager-bridge": "5.4.*",
         "symfony/runtime": "5.4.*",
         "symfony/security-bundle": "^5.4",
+        "symfony/sendinblue-mailer": "^5.4",
         "symfony/twig-bundle": "^5.4",
         "symfony/validator": "^5.4",
         "symfony/yaml": "5.4.*",
         "symfonycasts/verify-email-bundle": "^1.10",
         "vich/uploader-bundle": "^1.21"
-
     },
     "config": {
         "allow-plugins": {

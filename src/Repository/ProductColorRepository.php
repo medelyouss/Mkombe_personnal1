@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\ProductColor;
+use App\Entity\Productcolor;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<ProductColor>
+ * @extends ServiceEntityRepository<Productcolor>
  *
- * @method ProductColor|null find($id, $lockMode = null, $lockVersion = null)
- * @method ProductColor|null findOneBy(array $criteria, array $orderBy = null)
- * @method ProductColor[]    findAll()
- * @method ProductColor[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Productcolor|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Productcolor|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Productcolor[]    findAll()
+ * @method Productcolor[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ProductColorRepository extends ServiceEntityRepository
+class ProductcolorRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ProductColor::class);
+        parent::__construct($registry, Productcolor::class);
     }
 
-    public function add(ProductColor $entity, bool $flush = false): void
+    public function add(Productcolor $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class ProductColorRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(ProductColor $entity, bool $flush = false): void
+    public function remove(Productcolor $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class ProductColorRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return ProductColor[] Returns an array of ProductColor objects
+//     * @return Productcolor[] Returns an array of Productcolor objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class ProductColorRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?ProductColor
+//    public function findOneBySomeField($value): ?Productcolor
 //    {
 //        return $this->createQueryBuilder('p')
 //            ->andWhere('p.exampleField = :val')
